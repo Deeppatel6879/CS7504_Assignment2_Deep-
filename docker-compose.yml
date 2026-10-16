@@ -1,0 +1,6 @@
+services:
+  tutorbookingapp:
+    image: ${DOCKER_REGISTRY-}tutorbookingapp
+    build:
+      context: .
+      dockerfile: TutorBookingApp/Dockerfile

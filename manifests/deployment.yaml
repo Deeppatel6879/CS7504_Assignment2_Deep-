@@ -1,0 +1,21 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tutorbooking
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tutorbooking
+  template:
+    metadata:
+      labels:
+        app: tutorbooking
+    spec:
+      containers:
+        - name: tutorbooking
+          image: acrc7504deep2026.azurecr.io/tutorbooking:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080

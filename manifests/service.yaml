@@ -1,0 +1,13 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: tutorbooking-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: tutorbooking
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
