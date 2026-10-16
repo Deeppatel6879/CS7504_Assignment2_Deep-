@@ -44,6 +44,11 @@ stages:
             $(tag)
 
 
+      - script: |
+          docker pull $(containerRegistry)/$(imageRepository):$(tag)
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --severity HIGH,CRITICAL --exit-code 0 $(containerRegistry)/$(imageRepository):$(tag)
+        displayName: 'Trivy container security scan'
+
       - publish: '$(Build.SourcesDirectory)/manifests'
         artifact: manifests
 
@@ -79,4 +84,6 @@ stages:
                 $(imagePullSecret)
               containers: |
                 $(containerRegistry)/$(imageRepository):$(tag)
+
+
 
