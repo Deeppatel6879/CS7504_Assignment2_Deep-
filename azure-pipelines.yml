@@ -31,19 +31,21 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    -- task: Docker@2
-  displayName: Build and push an image to container registry
-  inputs:
-    containerRegistry: 'YOUR_EXISTING_SERVICE_CONNECTION'
-    repository: 'tutorbooking'
-    command: 'buildAndPush'
-    Dockerfile: '$(Build.SourcesDirectory)/TutorBookingApp/Dockerfile'
-    buildContext: '$(Build.SourcesDirectory)'
-    tags: |
-      $(Build.BuildId)
 
-    - upload: manifests
-      artifact: manifests
+      - task: Docker@2
+        displayName: Build and push an image to container registry
+        inputs:
+          containerRegistry: '7a974462-b8a9-47dd-a567-96159d6abdf8'
+          repository: '$(imageRepository)'
+          command: 'buildAndPush'
+          Dockerfile: '$(Build.SourcesDirectory)/TutorBookingApp/Dockerfile'
+          buildContext: '$(Build.SourcesDirectory)'
+          tags: |
+            $(tag)
+
+
+      - publish: '$(Build.SourcesDirectory)/manifests'
+        artifact: manifests
 
 - stage: Deploy
   displayName: Deploy stage
