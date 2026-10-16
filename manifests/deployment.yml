@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: deeppatelcsassignmentdeep 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deeppatelcsassignmentdeep
+  template:
+    metadata:
+      labels:
+        app: deeppatelcsassignmentdeep 
+    spec:
+      containers:
+        - name: deeppatelcsassignmentdeep 
+          image: acrc7504deep2026.azurecr.io/deeppatelcsassignmentdeep
+          ports:
+          - containerPort: 8080
